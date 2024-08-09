@@ -1,4 +1,3 @@
-version: '3'
 
 volumes:
   pg_data:
@@ -35,4 +34,3 @@ services:
       - media:/media
     ports:
       - 8080:80
-      
