@@ -1,26 +1,29 @@
-#  Как работать с репозиторием финального задания
+## Описание 
+Социальная сеть для загрузки и просмотра изображений котиков. При выкладывании котика, ему можно выбрать имя, цвет, дату рождения и достижения.
 
-## Что нужно сделать
+## Стек технологий:
+____
+- Python
+- Django
+- Django REST Framework
+- PostgreSQL
+- JavaScript
+- Ngnix
+- Docker
+- Gunicorn
+- GitHub Actions
 
-Настроить запуск проекта Kittygram в контейнерах и CI/CD с помощью GitHub Actions
+## Запуск приложения в Docker
 
-## Как проверить работу с помощью автотестов
-
-В корне репозитория создайте файл tests.yml со следующим содержимым:
-```yaml
-repo_owner: ваш_логин_на_гитхабе
-kittygram_domain: полная ссылка (https://доменное_имя) на ваш проект Kittygram
-taski_domain: полная ссылка (https://доменное_имя) на ваш проект Taski
-dockerhub_username: ваш_логин_на_докерхабе
-```
-
-Скопируйте содержимое файла `.github/workflows/main.yml` в файл `kittygram_workflow.yml` в корневой директории проекта.
-
-Для локального запуска тестов создайте виртуальное окружение, установите в него зависимости из backend/requirements.txt и запустите в корневой директории проекта `pytest`.
-
-## Чек-лист для проверки перед отправкой задания
-
-- Проект Taski доступен по доменному имени, указанному в `tests.yml`.
-- Проект Kittygram доступен по доменному имени, указанному в `tests.yml`.
-- Пуш в ветку main запускает тестирование и деплой Kittygram, а после успешного деплоя вам приходит сообщение в телеграм.
-- В корне проекта есть файл `kittygram_workflow.yml`.
+1. Клонируйте репозиторий:
+2. В корне проекта переименуйте файл `.env.example`, в `.env`.
+3. Запустите Docker контейнеры:
+   ```bash
+   docker-compose up -d
+   ```
+4. Выполните миграции и создайте суперпользователя:
+   ```bash
+   docker-compose exec backend python manage.py migrate
+   docker-compose exec backend python manage.py createsuperuser
+   docker-compose exec backend python manage.py collectstatic --no-input
+   ```
